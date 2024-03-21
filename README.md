@@ -1,7 +1,9 @@
 # hyena
 > poc of SpringCloud project
 
-hyena-register -- nacos register
+run step:
+db -- import your local mysql first
+hyena-register -- nacos register start in source code
 hyena-gateway
 hyena-producer
 hyena-consumer -- feign to hyena-producer
