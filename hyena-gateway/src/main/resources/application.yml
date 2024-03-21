@@ -12,11 +12,23 @@ spring:
         server-addr: ${NACOS_HOST:127.0.0.1}:${NACOS_PORT:8848}
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
+    gateway:
+      routes:
+        - id: hyena-producer
+          uri: lb://hyena-producer
+          predicates:
+            - Path=/api/producer/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+        - id: hyena-consumer
+          uri: lb://hyena-consumer
+          predicates:
+            - Path=/api/consumer/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
   config:
     import:
       - optional:nacos:application-dev.yml
-      - optional:nacos:${spring.application.name}-dev.yml
-
 
 
 
