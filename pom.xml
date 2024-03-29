@@ -39,24 +39,23 @@
     </dependencies>
 
     <modules>
-        <module>hyena-register</module>
         <module>hyena-common</module>
+        <module>hyena-register</module>
         <module>hyena-gateway</module>
         <module>hyena-consumer</module>
         <module>hyena-producer</module>
     </modules>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencyManagement>
         <dependencies>
+            <!--hyena 公共版本定义-->
+            <dependency>
+                <groupId>com.zljin</groupId>
+                <artifactId>hyena-common-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!-- spring boot 依赖 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -99,4 +98,16 @@
             </activation>
         </profile>
     </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

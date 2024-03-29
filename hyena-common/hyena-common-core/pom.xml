@@ -5,18 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.zljin</groupId>
-        <artifactId>hyena</artifactId>
+        <artifactId>hyena-common</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>hyena-common</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>hyena-common-core</artifactId>
+    <packaging>jar</packaging>
 
-    <description>hyena 公共聚合模块</description>
-
-    <modules>
-        <module>hyena-common-bom</module>
-        <module>hyena-common-core</module>
-    </modules>
-
+    <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>
