@@ -17,6 +17,7 @@
     <modules>
         <module>hyena-common-bom</module>
         <module>hyena-common-core</module>
+        <module>hyena-common-mybatis</module>
     </modules>
 
 </project>

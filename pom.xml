@@ -44,6 +44,7 @@
         <module>hyena-gateway</module>
         <module>hyena-consumer</module>
         <module>hyena-producer</module>
+        <module>hyena-auth</module>
     </modules>
 
     <dependencyManagement>
