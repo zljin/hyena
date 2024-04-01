@@ -1,7 +1,10 @@
 package com.zljin.auth.service;
 
+import com.zljin.auth.entity.SysRole;
 import com.zljin.auth.entity.SysUser;
+import com.zljin.auth.entity.UserRoles;
 import com.zljin.auth.mapper.SysUserMapper;
+import com.zljin.auth.mapper.UserRolesMapper;
 import com.zljin.common.core.constant.CommonConstants;
 import com.zljin.common.core.util.JwtTokenUtil;
 import com.zljin.common.core.util.SnowFlakeUtil;
@@ -26,14 +29,17 @@ public class AuthService {
 
     SysUserMapper sysUserMapper;
 
+    UserRolesMapper userRolesMapper;
+
     AuthenticationManager authenticationManager;
 
     UserService userDetailsService;
 
-    public AuthService(SysUserMapper sysUserMapper, AuthenticationManager authenticationManager, UserService userDetailsService) {
+    public AuthService(SysUserMapper sysUserMapper, AuthenticationManager authenticationManager, UserService userDetailsService, UserRolesMapper userRolesMapper) {
         this.sysUserMapper = sysUserMapper;
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
+        this.userRolesMapper = userRolesMapper;
     }
 
     public boolean register(SysUser user) {
@@ -42,6 +48,12 @@ public class AuthService {
         user.setPassword(encoder.encode(user.getPassword()));
         try {
             sysUserMapper.insert(user);
+            for (SysRole sysRole : user.getSysRoles()) {
+                UserRoles userRoles = new UserRoles();
+                userRoles.setUserId(user.getUserId());
+                userRoles.setRolesId("ROLE_ADMIN".equals(sysRole.getRoleCode()) ? 1 : 2);
+                userRolesMapper.insert(userRoles);
+            }
         } catch (Exception e) {
             log.error(e.toString());
             return false;

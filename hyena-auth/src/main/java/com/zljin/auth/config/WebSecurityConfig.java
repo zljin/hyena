@@ -25,10 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private UserService userService;
 
-//    @Bean
-//    public JwtTokenFilter authenticationTokenFilterBean() throws Exception {
-//        return new JwtTokenFilter();
-//    }
+    @Bean
+    public JwtTokenFilter authenticationTokenFilterBean() throws Exception {
+        return new JwtTokenFilter();
+    }
 
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -52,8 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT).authenticated()
                 .antMatchers(HttpMethod.DELETE).authenticated()
                 .antMatchers(HttpMethod.GET).authenticated();
-//        httpSecurity
-//                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+        httpSecurity
+                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
         httpSecurity.headers().cacheControl();
     }
 
