@@ -3,6 +3,7 @@ package com.zljin.auth.service;
 import com.zljin.auth.entity.SysUser;
 import com.zljin.auth.mapper.SysUserMapper;
 import com.zljin.common.core.constant.CommonConstants;
+import com.zljin.common.core.util.JwtTokenUtil;
 import com.zljin.common.core.util.SnowFlakeUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -55,25 +56,6 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return generateToken(userDetails);
-    }
-
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("sub", userDetails.getUsername());
-        claims.put("created", new Date());
-        return generateToken(claims);
-    }
-
-    private String generateToken(Map<String, Object> claims) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, CommonConstants.SECRET)
-                .compact();
-    }
-
-    private Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + CommonConstants.EXPIRATION_TIME * 1000);
+        return JwtTokenUtil.generateToken(userDetails.getUsername());
     }
 }
