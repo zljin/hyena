@@ -5,11 +5,8 @@ import com.zljin.auth.entity.SysUser;
 import com.zljin.auth.entity.UserRoles;
 import com.zljin.auth.mapper.SysUserMapper;
 import com.zljin.auth.mapper.UserRolesMapper;
-import com.zljin.common.core.constant.CommonConstants;
 import com.zljin.common.core.util.JwtTokenUtil;
 import com.zljin.common.core.util.SnowFlakeUtil;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,10 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Slf4j
