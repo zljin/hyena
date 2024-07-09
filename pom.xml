@@ -5,7 +5,7 @@
 
     <groupId>com.zljin</groupId>
     <artifactId>hyena-cloud</artifactId>
-    <name>hyena</name>
+    <name>hyena-cloud</name>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
